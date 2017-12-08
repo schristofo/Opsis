@@ -4,3 +4,4 @@ Opsis Project:
 - Analize the point set
 - Find a point pattern
 - Guess next points
+
