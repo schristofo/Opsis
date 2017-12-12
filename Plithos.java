@@ -1,11 +1,6 @@
 package opsis;
 
 import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.lang.Exception;
-import java.io.IOException;
-import java.io.FileNotFoundException;
 
 //Class that contains an ArrayList of Points with number of Xs' : numOfX and number of Ys' : numOfY
 public class Plithos{
