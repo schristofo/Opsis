@@ -1,6 +1,11 @@
 package opsis;
 
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.lang.Exception;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 //Class that contains an ArrayList of Points with number of Xs' : numOfX and number of Ys' : numOfY
 public class Plithos{
@@ -20,9 +25,26 @@ public class Plithos{
   public int getNumOfX() {
 	  return numOfX;
   }
-  
   public Point getPoint(int k) {
 	  return points.get(k);
+  }
+  public int size() {
+	  if(!points.isEmpty())
+		  return points.size();
+	  else return 0;
+  }
+  
+  public void status() {
+	  for(int i = 0 ; i < this.size(); i++) {
+		  System.out.print("point " + i + ": {  ");
+		  for(int j = 0 ; j < numOfY ; j++)
+			  System.out.print("y" + j + "=" + points.get(i).getY()[j] + "  ");
+		  System.out.print(" } , {  ");
+		  for(int j = 0 ; j < numOfX ; j++)
+			  System.out.print("x" + j + "=" + points.get(i).getX()[j] + "  ");
+		  System.out.println("}");
+	  }
+	  
   }
 
   public void newPoint(){		//Function adding a point without parameters : O(0,0)
@@ -39,7 +61,10 @@ public class Plithos{
     points.add(temp);
     points.ensureCapacity(points.size()+1);
   }
-
+  public void newPoint(Point p) {
+	  points.add(p);
+	  points.ensureCapacity(points.size()+1);
+  }
   public void newPoint(double[] y , double[] x){		//Function adding a point with X and Y
     if(numOfX == -1 || numOfY == -1){
       numOfY = y.length;
@@ -54,7 +79,6 @@ public class Plithos{
     points.add(temp);
     points.ensureCapacity(points.size()+1);
   }
-
   public void newPoint(String name, double[] y , double[] x){		//Function adding a point with name
     if(numOfX == -1 || numOfY == -1){
       numOfY = y.length;
@@ -70,29 +94,6 @@ public class Plithos{
     points.ensureCapacity(points.size()+1);
   }
   
-  public double[] derOf(int a, int b) {		//Function returning the total derivative of each y
-	  int xs = points.get(a).getX().length;
-	  int ys = points.get(a).getY().length;
-	  
-	  double []temp = new double[ys];
-	  
-	  for(int i = 0 ; i < ys ; i++)		//initialization of temp
-		  temp[i] = 0;
-	  
-	  double[][] ders = new double[ys][xs];		//partial derivatives
-	  
-	  for(int i = 0 ; i < ys ; i++) {
-		  for(int j = 0 ; j < xs ; j++) 
-			  ders[i][j] = (double) (points.get(b).getY()[i] - points.get(a).getY()[i]) / (double) (points.get(b).getX()[j] - points.get(a).getX()[j]);		//calculating ders
-	  }
-	  
-	  for(int i = 0 ; i < ys ; i++) {		//partial ders -> total derivative
-		  for(int j = 0 ; j < xs ; j++) 
-			  temp[i] += ders[i][j];
-	  }
-	  return temp;
-  }
-  
   public double xDistance(int a , int b) {		//Fuction returning the distance between two point Xs
 	  
 	  double temp = 0;
@@ -105,7 +106,6 @@ public class Plithos{
 	  
 	  return temp;
   }
-  
   public double yDistance(int a , int b) {		//Fuction returning the distance between two point Ys
 	  
 	  double temp = 0;
@@ -145,4 +145,3 @@ public class Plithos{
 	  }
 
 }
-
