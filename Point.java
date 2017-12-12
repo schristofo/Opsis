@@ -24,6 +24,49 @@ public class Point{
     this.y = y;
   }
 
+  public Point(String fileString) {
+    String fileLoc = fileString;
+    BufferedReader buf = null;
+    String line = "";
+    String cvsSplitBy = ",";
+	  
+    try {
+
+      buf = new BufferedReader(new FileReader(fileLoc));
+      line = buf.readLine();
+
+          // use comma as separator
+      String[] ingre = line.split(cvsSplitBy);
+          
+      int numOfY = Integer.parseInt(ingre[0]);
+      double[] ys = new double[numOfY];
+      double[] xs = new double[ingre.length-numOfY];
+          
+      for(int i = 0 ; i < numOfY; i++) {
+          ys[i] = Double.parseDouble(ingre[i+1]);
+      }
+      for(int i = numOfY ; i < ingre.length; i++) {
+          xs[i-numOfY] = Double.parseDouble(ingre[i]);
+      }
+          
+      y = ys;
+      x = xs;
+
+  } catch (FileNotFoundException e) {
+     e.printStackTrace();
+  } catch (IOException e) {
+     e.printStackTrace();
+  } finally {
+      if (buf != null) {
+          try {
+              buf.close();
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
+      }
+  }
+}
+
   public String getName(){
 	if(name == "")
 		return "n/a";
