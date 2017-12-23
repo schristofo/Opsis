@@ -31,10 +31,7 @@ public class Point{
   }
 	
   public String getName(){
-	if(name == "")
-		return "n/a";
-	else
-		return name;
+	  return name;
   }
   public double[] getY() {
 	  return y;
