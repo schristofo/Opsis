@@ -5,7 +5,7 @@ import java.util.ArrayList;
 //Class that contains an ArrayList of Points with number of Xs' : numOfX and number of Ys' : numOfY
 public class Plithos{
   ArrayList<Point> points;
-  static int numOfY = -1 , numOfX = -1;
+  int numOfY = -1 , numOfX = -1;
 
   public Plithos(){
     points = new ArrayList<Point>();
@@ -37,7 +37,12 @@ public class Plithos{
 		  System.out.print(" } , {  ");
 		  for(int j = 0 ; j < numOfX ; j++)
 			  System.out.print("x" + j + "=" + points.get(i).getX()[j] + "  ");
-		  System.out.println("}");
+		  System.out.print("} ");
+		
+		  if(points.get(i).getName() != "") 
+			  System.out.println(points.get(i).getName());
+		  else
+			  System.out.println();
 	  }
 	  
   }
@@ -101,6 +106,20 @@ public class Plithos{
 	  
 	  return temp;
   }
+  public double xDistance(int a , Point p) {		//Function returning the distance between two point Xs
+	  
+	  double temp = 0;
+	  if(p.getX().length != numOfX) {
+		  return -1;  
+	  }
+	  else{
+		  for(int i = 0; i < numOfX; i ++) {
+			  temp += (points.get(a).getX()[i] - p.getX()[i]) * (points.get(a).getX()[i] - p.getX()[i]);
+	  	  }
+	  	  temp = Math.sqrt(temp);
+	  	  return temp;
+  	  }
+  }
   public double yDistance(int a , int b) {		//Fuction returning the distance between two point Ys
 	  
 	  double temp = 0;
@@ -138,5 +157,12 @@ public class Plithos{
 	 
 	  return new Point(avY , avX);
 	  }
+	
+  public void defineSphere(String s, Point p, double radius) {		//Function labeling a group of points in a sphere
+	  for(int i = 0 ; i < points.size(); i++) {
+		  if(xDistance(i,p) < radius && xDistance(i,p) >= 0)
+			 points.get(i).setName(s); 
+	  }
+  }
 
 }
