@@ -5,7 +5,7 @@ import java.util.ArrayList;
 //Class that contains an ArrayList of Points with number of Xs' : numOfX and number of Ys' : numOfY
 public class Plithos{
   ArrayList<Point> points;
-  int numOfY = -1 , numOfX = -1;
+  int numOfX = -1;
 
   public Plithos(){
     points = new ArrayList<Point>();
@@ -14,9 +14,6 @@ public class Plithos{
     points = new ArrayList<Point>(n);
   }
   
-  public int getNumOfY() {
-	  return numOfY;
-  }
   public int getNumOfX() {
 	  return numOfX;
   }
@@ -32,9 +29,6 @@ public class Plithos{
   public void status() {
 	  for(int i = 0 ; i < this.size(); i++) {
 		  System.out.print("point " + i + ": {  ");
-		  for(int j = 0 ; j < numOfY ; j++)
-			  System.out.print("y" + j + "=" + points.get(i).getY()[j] + "  ");
-		  System.out.print(" } , {  ");
 		  for(int j = 0 ; j < numOfX ; j++)
 			  System.out.print("x" + j + "=" + points.get(i).getX()[j] + "  ");
 		  System.out.print("} ");
@@ -48,11 +42,10 @@ public class Plithos{
   }
 
   public void newPoint(){		//Function adding a point without parameters : O(0,0)
-    if(numOfX == -1 || numOfY == -1){
-      numOfY = 1;
+    if(numOfX == -1){
       numOfX = 1;
     }
-    if(numOfY != 1 || numOfX != 1){
+    if(numOfX != 1){
       System.out.println("Error: Data points not compatible");
       return;
     }
@@ -65,36 +58,34 @@ public class Plithos{
 	  points.add(p);
 	  points.ensureCapacity(points.size()+1);
   }
-  public void newPoint(double[] y , double[] x){		//Function adding a point with X and Y
-    if(numOfX == -1 || numOfY == -1){
-      numOfY = y.length;
+  public void newPoint(double[] x){		//Function adding a point with X and Y
+    if(numOfX == -1){
       numOfX = x.length;
     }
-    if(y.length != numOfY || x.length != numOfX){
+    if(x.length != numOfX){
       System.out.println("Error: Data points not compatible");
       return;
     }
 
-    Point temp = new Point(y , x);
+    Point temp = new Point(x);
     points.add(temp);
     points.ensureCapacity(points.size()+1);
   }
   public void newPoint(String name, double[] y , double[] x){		//Function adding a point with name
-    if(numOfX == -1 || numOfY == -1){
-      numOfY = y.length;
+    if(numOfX == -1){
       numOfX = x.length;
     }
-    if(y.length != numOfY || x.length != numOfX){
+    if(x.length != numOfX){
       System.out.println("Error: Data points not compatible");
       return;
     }
 
-    Point temp = new Point(name , y , x);
+    Point temp = new Point(name , x);
     points.add(temp);
     points.ensureCapacity(points.size()+1);
   }
   
-  public double xDistance(int a , int b) {		//Fuction returning the distance between two point Xs
+  public double xDistance(int a , int b) {		//Function returning the distance between two point Xs
 	  
 	  double temp = 0;
 	  
@@ -120,28 +111,12 @@ public class Plithos{
 	  	  return temp;
   	  }
   }
-  public double yDistance(int a , int b) {		//Fuction returning the distance between two point Ys
-	  
-	  double temp = 0;
-	  
-	  for(int i = 0; i < numOfY; i ++) {
-		  temp += (points.get(a).getY()[i] - points.get(b).getY()[i]) * (points.get(a).getY()[i] - points.get(b).getY()[i]);
-	  }
-	  
-	  temp = Math.sqrt(temp);
-	  
-	  return temp;
-  }
   
-  public Point average() {
+  public Point average() {		//Function calculating the average point
 	  double[] avX = new double[numOfX];
-	  double[] avY = new double[numOfY];
 	  
 	  for(int i = 0 ; i < numOfX; i++) {		//Array initialization
 		  avX[i] = 0;
-	  }
-	  for(int i = 0 ; i < numOfY; i++) {
-		  avY[i] = 0;
 	  }
 	  
 	  for(int i = 0 ; i < numOfX; i++) {
@@ -149,16 +124,11 @@ public class Plithos{
 			  avX[i] += points.get(j).getX()[i];
 		  avX[i] /= points.size();
 	  }
-	  for(int i = 0 ; i < numOfY; i++) {
-		  for(int j = 0 ; j < points.size() ; j++)
-			  avY[i] += points.get(j).getY()[i];
-		  avY[i] /= points.size();
-	  }
 	 
-	  return new Point(avY , avX);
-	  }
-	
-  public void defineSphere(String s, Point p, double radius) {		//Function labeling a group of points in a sphere
+	  return new Point(avX);
+  }
+  
+  public void defineSphere(String s, Point p, double radius) {
 	  for(int i = 0 ; i < points.size(); i++) {
 		  if(xDistance(i,p) < radius && xDistance(i,p) >= 0)
 			 points.get(i).setName(s); 
