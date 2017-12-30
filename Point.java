@@ -2,56 +2,64 @@ package opsis;
 
 import java.util.Arrays;
 
-public class Point{
+public class Point {
 
   String name;
-  double []y;
-  double []x;
+  double[] x;
   
   public Point(){
-    name = "";
-    y = null;
-    x = null;
+      name = "";
+      x = null;
   }
-  public Point(double y , double[] x){
-    name = "";
-    this.y[0] = y;
-    this.x = x;
+  public Point(double[] x) {
+      name = "";
+      this.x = x;
   }
-  public Point(double[] y , double[] x){
-    name = "";
-    this.y = y;
-    this.x = x;
+  public Point(String name, double[] x){
+      this.name = name;
+      this.x = x;
   }
-  public Point(String name , double[] y , double[] x){
-    this.name = name;
-    this.x = x;
-    this.y = y;
-  }
-	
+
+
   public String getName(){
 	  return name;
-  }
-  public double[] getY() {
-	  return y;
   }
   public double[] getX() {
 	  return x;
   }
-  public double[] getYX(){
-      double[] result = Arrays.copyOf(y, y.length + x.length);
-      System.arraycopy(x, 0, result, y.length, x.length);
-      return result;
+  public double getXNumber(int n){
+	  if(n >= 0 && n < x.length)
+		  return x[n];
+	  else {
+		  System.out.println("Element out of array length");
+		  return 0;
+	  }
   }
-
+  
   public void setName(String name){
-    this.name = name;
-  }
-  public void setY(double ...y){
-    this.y = y;
+      this.name = name;
   }
   public void setX(double ...x){
-    this.x = x;
+      this.x = x;
+  }
+  public void setXNumber(int n, double d) {
+	  if(n >= 0 && n < x.length)
+		  x[n] = d;
+  }
+  
+  public double distance(Point p) {
+	  double temp = 0;
+	  
+	  if(p.getX().length != x.length) {
+		  return -1;  
+	  }
+	  else{
+		  for(int i = 0; i < x.length; i ++) {
+			  temp += (x[i] - p.getX()[i]) * (x[i] - p.getX()[i]);
+	  	  }
+	  	  temp = Math.sqrt(temp);
+	  	  return temp;
+  	  }
   }
 
 }
