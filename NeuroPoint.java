@@ -5,27 +5,30 @@ import java.util.Arrays;
 public class NeuroPoint extends Point{
 
 	double[] w;
+	double y;
 	  
 	public NeuroPoint(){
 		super();
 		w = null;
+		y = 0;
 	}
 	public NeuroPoint(double y , double[] x) {
-		super(y,x);
+		super(x);
+		this.y = y;
 		w = new double[x.length];
     	}
-	public NeuroPoint(double[] y , double[] x){
-		super(y,x);
+	public NeuroPoint(String name , double y , double[] x){
+		super(name,x);
 		w = new double[x.length];
-	}
-	public NeuroPoint(String name , double[] y , double[] x){
-		super(name,y,x);
-		w = new double[x.length];
+		this.y = y;
 	}
 
 	public double[] getWeight() {
-	  return w;
+		return w;
     }
+	public double getY() {
+		return y;
+	}
 	
 	public void generateWeights(double l , double h) {
 		if(w.length != 0) {
