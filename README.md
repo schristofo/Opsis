@@ -1,7 +1,8 @@
 # Opsis
-Opsis Project:
-- Read a number of points
-- Analize the point set
-- Find a point pattern
-- Guess next points
-
+## AiBranch:
+This branch makes use of *Neural Networks* in order 
+to scan a stream of Point training data and recognize
+its patterns for object analysis.
+- Training through Point dataset
+- Testing using various Point testers
+- Recognize the pattern of the set
