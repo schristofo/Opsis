@@ -1,7 +1,8 @@
 # Opsis
-Opsis Project:
-- Read a number of points
-- Analize the point set
-- Find a point pattern
-- Guess next points
-
+## Plithos branch:
+This branch is intended for statistical analysis
+and the view of the *big picture* of Point datasets.
+- Scanning Point dataset
+- Calculating set properties
+- Come to conclusions
+- Visualising the set
