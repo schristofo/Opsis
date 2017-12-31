@@ -6,3 +6,4 @@ and the view of the *big picture* of Point datasets.
 - Calculating set properties
 - Come to conclusions
 - Visualising the set
+
