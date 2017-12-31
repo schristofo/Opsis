@@ -6,3 +6,4 @@ its patterns for object analysis.
 - Training through Point dataset
 - Testing using various Point testers
 - Recognize the pattern of the set
+
