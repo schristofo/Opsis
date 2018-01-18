@@ -1,6 +1,5 @@
 package opsis;
 
-import java.util.Arrays;
 
 public class NeuroPoint extends Point{
 
@@ -12,25 +11,21 @@ public class NeuroPoint extends Point{
 		w = null;
 		y = 0;
 	}
-	public NeuroPoint(double y , double[] x) {
+	public NeuroPoint(double[] x) {
 		super(x);
-		this.y = y;
 		w = new double[x.length];
-    	}
-	public NeuroPoint(String name , double y , double[] x){
-		super(name,x);
-		w = new double[x.length];
-		this.y = y;
-	}
+		y = activate();
+    }
 
+	//getters
 	public double[] getWeight() {
 		return w;
     }
 	public double getY() {
-		return y;
+		return y = activate();
 	}
 	
-	public void generateWeights(double l , double h) {
+	public void generateWeights(double l , double h) {			//generate random weights
 		if(w.length != 0) {
 			for(int i = 0 ; i < w.length; i++) {
 				w[i] = (h-l) * Math.random() + l;
@@ -39,19 +34,20 @@ public class NeuroPoint extends Point{
 		}
 	}
 	
-	private double[] dendrites() {
-
-		double[] temp = new double[x.length];
-		
-		if(x.length != 0) {
-			for(int i = 0; i < temp.length; i++) {
-				temp[i] = w[i] * x[i];
-			}
-			return temp;
+	private double dendritis(int i) {				//each branch/input weighted
+		return w[i] * x[i];
+	}
+	
+	private double sum() {				//sum of all branches weighted
+		double ytemp=0;
+		for(int i = 0 ; i < x.length; i++) {
+			ytemp += dendritis(i);
 		}
-		else {
-			return null;
-		}
+		return ytemp;
+	}
+	
+	private double activate() {				//activation function return to y
+		return (sum())/(Math.sqrt(1+sum()*sum()));
 	}
 	
 }
